@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">HomeBooking</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="title_find">Find</string>
+    <string name="title_Sign_In">Sign In</string>
+
+    <string name="temperature_label">Температура</string>
+    <string name="feels_like_label">Ощущается как</string>
+    <string name="city_coordinates">lt/ln: %s, %s"</string>
+    <string name="switcher_of_cities">Switcher of cities</string>
+    <string name="error">Error</string>
+    <string name="reload">Reload</string>
+</resources>
