@@ -4,19 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.geekbrains.homebooking.R
 import com.geekbrains.homebooking.databinding.FragmentCitiesBinding
-import com.geekbrains.homebooking.databinding.FragmentHomeBinding
 import com.geekbrains.homebooking.model.AppState
-import com.geekbrains.homebooking.model.CitiesFragmentAdapter
 import com.geekbrains.homebooking.model.City
 import com.geekbrains.homebooking.ui.hotels.HotelsFragment
 import com.geekbrains.weatherwithmvvm.model.interfaces.OnItemViewClickListener
-import com.google.android.material.snackbar.Snackbar
 
 class CitiesFragment : Fragment() {
 
