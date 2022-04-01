@@ -1,15 +1,14 @@
 package com.geekbrains.homebooking.ui.cities
 
+import OnItemViewCityClickListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.homebooking.databinding.ItemCityBinding
 import com.geekbrains.homebooking.model.City
-import com.geekbrains.weatherwithmvvm.model.interfaces.OnItemViewClickListener
 
-
-class CitiesFragmentAdapter(private val itemClickListener: OnItemViewClickListener)
+class CitiesFragmentAdapter(private val itemCityClickListener: OnItemViewCityClickListener)
     : RecyclerView.Adapter<CitiesFragmentAdapter.MainViewHolder>() {
     private var cityData: List<City> = listOf()
     private lateinit var binding: ItemCityBinding
@@ -39,10 +38,10 @@ class CitiesFragmentAdapter(private val itemClickListener: OnItemViewClickListen
 
         fun bind(city: City) = with(binding) {
             citiesFragmentRecyclerItemTextView.text = city.city
-            poster.setImageResource(city.id)
+            imageCity.setImageResource(city.id)
 
             root.setOnClickListener {
-                itemClickListener.onItemViewClick(city)
+                itemCityClickListener.onItemViewClick(city)
             }
         }
     }
