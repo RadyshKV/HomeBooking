@@ -1,5 +1,6 @@
 package com.geekbrains.homebooking.ui.cities
 
+import OnItemViewCityClickListener
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import com.geekbrains.homebooking.databinding.FragmentCitiesBinding
 import com.geekbrains.homebooking.model.AppState
 import com.geekbrains.homebooking.model.City
 import com.geekbrains.homebooking.ui.hotels.HotelsFragment
-import com.geekbrains.weatherwithmvvm.model.interfaces.OnItemViewClickListener
 
 class CitiesFragment : Fragment() {
 
@@ -26,7 +26,8 @@ class CitiesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
         _binding = FragmentCitiesBinding.inflate(inflater, container, false)
                  return binding.root
     }
@@ -39,20 +40,24 @@ class CitiesFragment : Fragment() {
         viewModel.getDataFromLocalSource()
     }
 
-    @Suppress("NAME_SHADOWING")
+    override fun onResume() {
+        super.onResume()
+        requireActivity().setTitle(R.string.app_name)
+    }
+
     private fun renderData(appState: AppState) = with(binding) {
         when (appState) {
-            is AppState.Success -> {
+            is AppState.SuccessCity -> {
                 citiesFragmentLoadingLayout.visibility = View.GONE
-                adapter = CitiesFragmentAdapter(object : OnItemViewClickListener {
+                adapter = CitiesFragmentAdapter(object : OnItemViewCityClickListener {
                     override fun onItemViewClick(city: City) {
                         val manager = activity?.supportFragmentManager
                         manager?.let { manager ->
                             val bundle = Bundle().apply {
-                                putParcelable(HotelsFragment.BUNDLE_EXTRA, city)
+                                putParcelable(HotelsFragment.BUNDLE_CITY, city)
                             }
                             manager.beginTransaction()
-                                .add(R.id.container, HotelsFragment.newInstance(bundle))
+                                .replace(R.id.container, HotelsFragment.newInstance(bundle))
                                 .addToBackStack("")
                                 .commitAllowingStateLoss()
                         }

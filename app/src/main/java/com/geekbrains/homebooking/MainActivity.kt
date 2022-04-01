@@ -5,7 +5,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import com.geekbrains.homebooking.databinding.ActivityMainBinding
 import com.geekbrains.homebooking.ui.cities.CitiesFragment
-import com.geekbrains.homebooking.ui.cities.StartFragment
 import com.geekbrains.homebooking.ui.dashboard.DashboardFragment
 
 class MainActivity : AppCompatActivity() {

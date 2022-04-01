@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <FrameLayout
@@ -12,7 +11,7 @@
         android:paddingHorizontal="5dp"  >
 
         <ImageView
-            android:id="@+id/poster"
+            android:id="@+id/image_city"
             android:layout_width="@dimen/poster_width"
             android:layout_height="@dimen/poster_height"
             android:layout_gravity="center" />
@@ -25,6 +24,8 @@
             android:textColor="@color/primaryTextColor"
             android:padding="@dimen/recycler_item_padding"
             android:textSize="@dimen/recycler_item_text_size"
+            android:textStyle="bold"
+            android:textAlignment="center"
             tools:text="Москва" />
     </FrameLayout>
 

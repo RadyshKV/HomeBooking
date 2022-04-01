@@ -1,30 +1,28 @@
-package com.geekbrains.homebooking.ui.cities
+package com.geekbrains.homebooking.ui.hotels
 
 import Repository
 import RepositoryImpl
 import androidx.lifecycle.*
 import com.geekbrains.homebooking.model.AppState
+import com.geekbrains.homebooking.model.City
 
-class CitiesViewModel(private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()) : ViewModel(), LifecycleObserver {
+class HotelsViewModel(private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()) : ViewModel(), LifecycleObserver {
 
     private val repository: Repository = RepositoryImpl()
 
     private val lifeCycleLiveData = MutableLiveData<String>()
 
     fun getLiveData() = liveDataToObserve
-    fun getData(): LiveData<AppState> {
-        getDataFromLocalSource()
-        return liveDataToObserve
-    }
 
     fun getLifeCycleData() = lifeCycleLiveData
 
-    fun getDataFromLocalSource() {
+
+    fun getDataFromLocalSource(city: City) {
         liveDataToObserve.value = AppState.Loading
         Thread {
             Thread.sleep(1000)
-            liveDataToObserve.postValue(AppState.SuccessCity(
-                repository.getCityFromLocalStorage())
+            liveDataToObserve.postValue(AppState.SuccessHotel(
+                repository.getHotelFromLocalStorage(city))
             )
             //liveDataToObserve.postValue(AppState.Error())
         }.start()
