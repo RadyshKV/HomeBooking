@@ -1,3 +1,5 @@
+package com.geekbrains.homebooking.model
+
 import com.geekbrains.homebooking.model.City
 import com.geekbrains.homebooking.model.Hotel
 

@@ -1,4 +1,4 @@
-package com.geekbrains.homebooking.ui.hotel_info
+package com.geekbrains.homebooking.ui.hotel_info_old
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

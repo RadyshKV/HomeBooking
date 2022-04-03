@@ -1,54 +1,62 @@
 package com.geekbrains.homebooking.ui.hotel_info
 
+import com.geekbrains.homebooking.ui.base.BackButtonListener
+import com.geekbrains.homebooking.model.HotelModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.os.bundleOf
+import com.geekbrains.homebooking.App
 import com.geekbrains.homebooking.databinding.FragmentHotelInfoBinding
-import com.geekbrains.homebooking.model.Hotel
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
+class HotelInfoFragment() : MvpAppCompatFragment(), HotelInfoView, BackButtonListener {
 
-class HotelInfoFragment : Fragment() {
-
-    private lateinit var hotelInfoViewModel: HotelInfoViewModel
+    private val presenter by moxyPresenter {
+        App.instance.appComponent.hotelInfoPresenterFactory().presenter(hotelModel)
+    }
     private var _binding: FragmentHotelInfoBinding? = null
+    private val binding
+        get() = _binding!!
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private val hotelModel by lazy {
+        requireArguments().getSerializable(HOTEL_MODEL) as HotelModel
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        hotelInfoViewModel =
-            ViewModelProvider(this).get(HotelInfoViewModel::class.java)
-        val hotel = arguments?.getParcelable<Hotel>(BUNDLE_HOTEL)
+    ): View {
         _binding = FragmentHotelInfoBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        hotel?.let { hotel ->
-            val hotel = hotel.hotel
-            binding.textDashboard.text = hotel
-            requireActivity().setTitle(hotel)
-        }
-        return root
+
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun backPressed() = presenter.backPressed()
+
+    override fun setHotelName(hotelName: String?) {
+        binding.hotelName.text = hotelName
+    }
+
+    override fun setHotelRating(hotelRating: Int) {
+        binding.hotelRating.text = hotelRating.toString()
     }
 
     companion object {
-        const val BUNDLE_HOTEL = "hotel"
-
-        fun newInstance(bundle: Bundle): HotelInfoFragment {
-            val fragment = HotelInfoFragment()
-            fragment.arguments = bundle
-            return fragment
+        private const val HOTEL_MODEL = "HOTEL_MODEL"
+        fun newInstance(hotelModel: HotelModel): HotelInfoFragment {
+            return HotelInfoFragment().apply {
+                arguments = bundleOf(HOTEL_MODEL to hotelModel)
+            }
         }
     }
 }
+
+

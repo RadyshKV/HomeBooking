@@ -1,4 +1,4 @@
-package com.geekbrains.homebooking.ui.hotels
+package com.geekbrains.homebooking.ui.hotelsold
 
 import OnItemViewHotelClickListener
 import android.view.LayoutInflater
