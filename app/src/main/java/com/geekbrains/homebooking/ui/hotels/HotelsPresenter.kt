@@ -2,7 +2,7 @@ package com.geekbrains.homebooking.ui.hotels
 
 import com.geekbrains.homebooking.model.CityModel
 import com.geekbrains.homebooking.model.HotelModel
-import IListPresenter
+import com.geekbrains.homebooking.ui.base.IListPresenter
 import android.util.Log
 import com.geekbrains.homebooking.domain.HotelsRepository
 import com.geekbrains.homebooking.navigation.AppScreens
@@ -29,7 +29,7 @@ class HotelsPresenter @AssistedInject constructor(
         hotelsListPresenter.itemClickListener = {
             router.navigateTo(
                 appScreens.hotelInfoScreen(
-                    hotelsListPresenter.hotels.get(it.pos)
+                    hotelsListPresenter.hotels[it.pos]
                 )
             )
         }

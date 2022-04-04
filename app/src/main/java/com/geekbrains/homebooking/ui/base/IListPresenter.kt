@@ -1,4 +1,4 @@
-import com.geekbrains.homebooking.ui.base.IItemView
+package com.geekbrains.homebooking.ui.base
 
 interface IListPresenter<V : IItemView> {
     var itemClickListener: ((V) -> Unit)?
