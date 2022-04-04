@@ -1,9 +1,9 @@
 package com.geekbrains.homebooking.ui.cities
 
-import com.geekbrains.homebooking.model.CityModel
-import IListPresenter
+import com.geekbrains.homebooking.ui.base.IListPresenter
 import android.util.Log
 import com.geekbrains.homebooking.domain.CitiesRepository
+import com.geekbrains.homebooking.model.CityModel
 import com.geekbrains.homebooking.navigation.AppScreens
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

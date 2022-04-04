@@ -3,6 +3,7 @@ package com.geekbrains.homebooking
 
 import android.app.Application
 import com.geekbrains.homebooking.di.components.AppComponent
+import com.geekbrains.homebooking.di.components.DaggerAppComponent
 import com.geekbrains.homebooking.di.modules.ContextModule
 
 class App: Application() {
