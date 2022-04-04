@@ -3,7 +3,9 @@ package com.geekbrains.homebooking.ui.cities
 import com.geekbrains.homebooking.ui.base.IListPresenter
 import android.util.Log
 import com.geekbrains.homebooking.domain.CitiesRepository
+import com.geekbrains.homebooking.model.City
 import com.geekbrains.homebooking.model.CityModel
+import com.geekbrains.homebooking.model.getCities
 import com.geekbrains.homebooking.navigation.AppScreens
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -18,6 +20,7 @@ class CitiesPresenter @Inject constructor(
 ) : MvpPresenter<CitiesView>() {
 
     val citiesListPresenter = CitiesListPresenter()
+    val citiesListRVPresenter = CitiesListRVPresenter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -25,13 +28,24 @@ class CitiesPresenter @Inject constructor(
         citiesListPresenter.itemClickListener = {
             router.navigateTo(
                 appScreens.hotelsScreen(
-                    citiesListPresenter.cities.get(it.pos)
+                    citiesListPresenter.cities[it.pos]
+                )
+            )
+        }
+
+        citiesListRVPresenter.itemClickListener = {
+            router.navigateTo(
+                appScreens.hotelsScreen(
+                    citiesListPresenter.cities[it.pos]
+                   // citiesListRVPresenter.cities[it.pos]
                 )
             )
         }
     }
 
     private fun loadData() {
+
+        citiesListRVPresenter.cities.addAll(getCities())
 
         citiesRepository.getCities()
             .subscribeOn(Schedulers.io())
@@ -57,7 +71,21 @@ class CitiesPresenter @Inject constructor(
         override fun bindView(view: CityItemView) {
             val city = cities[view.pos]
             view.setName(city.name)
-            view.loadImage(city.imageUrl)
+            //view.loadImage(city.imageUrl)
+        }
+
+        override fun getCount() = cities.size
+    }
+
+    class CitiesListRVPresenter : IListPresenter<CityItemView> {
+        val cities = mutableListOf<City>()
+
+        override var itemClickListener: ((CityItemView) -> Unit)? = {}
+
+        override fun bindView(view: CityItemView) {
+            val city = cities[view.pos]
+            view.setName(city.city)
+            view.loadImage(city.id)
         }
 
         override fun getCount() = cities.size
@@ -68,3 +96,5 @@ class CitiesPresenter @Inject constructor(
         return true
     }
 }
+
+

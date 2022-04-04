@@ -11,8 +11,8 @@ import com.geekbrains.homebooking.ui.cities.CityItemView
 
 
 class CitiesAdapter(
-    private val presenter: CitiesPresenter.CitiesListPresenter,
-    private val imageLoader: ImageLoader<ImageView>
+    private val presenter: CitiesPresenter.CitiesListRVPresenter,
+    //private val imageLoader: ImageLoader<ImageView>
 ) : RecyclerView.Adapter<CitiesAdapter.CityViewHolder>() {
 
     inner class CityViewHolder(private val vb: ItemCityBinding) : RecyclerView.ViewHolder(vb.root),
@@ -21,8 +21,9 @@ class CitiesAdapter(
             vb.citiesFragmentRecyclerItemTextView.text = name
         }
 
-        override fun loadImage(imageUrl: String) {
-            imageLoader.loadInto(imageUrl, vb.imageCity)
+        override fun loadImage(id: Int) {
+            vb.imageCity.setImageResource(id)
+            //imageLoader.loadInto(imageUrl, vb.imageCity)
         }
 
         override var pos: Int = -1

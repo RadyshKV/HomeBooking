@@ -57,7 +57,7 @@
         app:layout_constraintStart_toStartOf="@id/input_layout"
         android:visibility="gone"
         android:paddingHorizontal="@dimen/margin_15_dp"
-        tools:visibility="gone"
+        tools:visibility="visible"
         tools:listitem="Москва"/>
 
     <TextView

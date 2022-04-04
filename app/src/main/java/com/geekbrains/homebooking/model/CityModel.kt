@@ -11,6 +11,14 @@ data class CityModel(
     val name: String,
 
     @Expose
-    val imageUrl: String,
+    val resort_id: String,
 
+    @Expose
+    val resort_name: String,
+
+    @Expose
+    val region_id: String,
+
+    @Expose
+    val region_name: String,
 ) : Serializable

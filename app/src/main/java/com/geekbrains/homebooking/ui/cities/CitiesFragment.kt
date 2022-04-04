@@ -1,7 +1,6 @@
 package com.geekbrains.homebooking.ui.cities
 
 import com.geekbrains.homebooking.ui.base.BackButtonListener
-import com.geekbrains.homebooking.ui.imageloading.GlideImageLoader
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,8 +26,8 @@ class CitiesFragment : MvpAppCompatFragment(), CitiesView, BackButtonListener {
 
     private val adapter by lazy {
         CitiesAdapter(
-            presenter.citiesListPresenter,
-            GlideImageLoader()
+            presenter.citiesListRVPresenter,
+            //GlideImageLoader()
         )
     }
 
@@ -44,7 +43,7 @@ class CitiesFragment : MvpAppCompatFragment(), CitiesView, BackButtonListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.citiesFragmentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        //binding.citiesFragmentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.citiesFragmentRecyclerView.adapter = adapter
     }
 
