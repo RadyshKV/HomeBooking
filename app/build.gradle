@@ -23,6 +23,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        buildTypes.each {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file("app.properties").newDataInputStream())
+            def multitourApiToken  = properties.getProperty("TOKEN", "")
+            it.buildConfigField "String", "TOKEN", multitourApiToken
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
