@@ -12,28 +12,42 @@ data class HotelModel(
     val name: String,
 
     @Expose
-    val cityId: String,
+    val type: String,
 
     @Expose
-    val address: String,
+    val url: String,
 
     @Expose
-    val website: String,
+    val address: String?,
 
     @Expose
-    val email: String,
+    val geo: Geo,
+
+   // @Expose
+   // val desc: String,
 
     @Expose
-    val telephone: String,
+    val images: List<String?>,
+
+    ) : Serializable
+
+data class Geo(
+    @Expose
+    val country_id: List<Int?>,
 
     @Expose
-    val coord_w: String,
+    val region_id: List<Int?>,
 
     @Expose
-    val coord_i: String,
+    val resort_id: List<Int?>,
 
     @Expose
-    val rating: Int,
+    val city_id: List<Int?>,
 
-): Serializable
+    @Expose
+    val lat: String?,
+
+    @Expose
+    val lng: String?,
+) : Serializable
 

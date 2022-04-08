@@ -3,9 +3,7 @@ package com.geekbrains.homebooking.ui.cities
 import com.geekbrains.homebooking.ui.base.IListPresenter
 import android.util.Log
 import com.geekbrains.homebooking.domain.CitiesRepository
-import com.geekbrains.homebooking.model.City
-import com.geekbrains.homebooking.model.CityModel
-import com.geekbrains.homebooking.model.getCities
+import com.geekbrains.homebooking.model.*
 import com.geekbrains.homebooking.navigation.AppScreens
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -36,8 +34,7 @@ class CitiesPresenter @Inject constructor(
         citiesListRVPresenter.itemClickListener = {
             router.navigateTo(
                 appScreens.hotelsScreen(
-                    citiesListPresenter.cities[it.pos]
-                   // citiesListRVPresenter.cities[it.pos]
+                   citiesListRVPresenter.cities[it.pos]
                 )
             )
         }
@@ -78,14 +75,13 @@ class CitiesPresenter @Inject constructor(
     }
 
     class CitiesListRVPresenter : IListPresenter<CityItemView> {
-        val cities = mutableListOf<City>()
+        val cities = mutableListOf<CityModel>()
 
         override var itemClickListener: ((CityItemView) -> Unit)? = {}
 
         override fun bindView(view: CityItemView) {
-            val city = cities[view.pos]
-            view.setName(city.city)
-            view.loadImage(city.id)
+            view.setName(getCityName()[view.pos])
+            view.loadImage(getCityImage()[view.pos])
         }
 
         override fun getCount() = cities.size

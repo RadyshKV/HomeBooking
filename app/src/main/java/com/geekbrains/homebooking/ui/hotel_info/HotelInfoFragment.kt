@@ -45,8 +45,8 @@ class HotelInfoFragment() : MvpAppCompatFragment(), HotelInfoView, BackButtonLis
         binding.hotelName.text = hotelName
     }
 
-    override fun setHotelRating(hotelRating: Int) {
-        binding.hotelRating.text = hotelRating.toString()
+    override fun setHotelType(hotelType: String) {
+        binding.hotelType.text = hotelType
     }
 
     companion object {

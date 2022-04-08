@@ -8,14 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.homebooking.App
+import com.geekbrains.homebooking.R
 import com.geekbrains.homebooking.databinding.FragmentHotelsBinding
 import com.geekbrains.homebooking.ui.hotels.adapter.HotelsAdapter
+import com.geekbrains.homebooking.ui.imageloading.GlideImageLoader
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class HotelsFragment: MvpAppCompatFragment(), HotelsView, BackButtonListener {
+class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
 
     private val presenter by moxyPresenter {
         App.instance.appComponent.hotelsPresenterFactory().presenter(cityModel)
@@ -26,7 +29,8 @@ class HotelsFragment: MvpAppCompatFragment(), HotelsView, BackButtonListener {
 
     private val adapter by lazy {
         HotelsAdapter(
-            presenter.hotelsListPresenter
+            presenter.hotelsListPresenter,
+            GlideImageLoader()
         )
     }
 
@@ -47,6 +51,18 @@ class HotelsFragment: MvpAppCompatFragment(), HotelsView, BackButtonListener {
         super.onViewCreated(view, savedInstanceState)
         binding.hotelsFragmentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.hotelsFragmentRecyclerView.adapter = adapter
+        binding.hotelsFragmentRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.HORIZONTAL
+            )
+        )
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().title = cityModel.name
     }
 
     override fun showLoading() {
@@ -65,7 +81,7 @@ class HotelsFragment: MvpAppCompatFragment(), HotelsView, BackButtonListener {
 
     override fun backPressed() = presenter.backPressed()
 
-    companion object{
+    companion object {
         private const val KEY_CITY_MODEL = "KEY_CITY_MODEL"
         fun newInstance(cityModel: CityModel): HotelsFragment {
             return HotelsFragment().apply {

@@ -28,7 +28,7 @@ data class CityRequest(
 ): Serializable
 
 
-data class CityBody(
+data class CityRequestBody(
     @Expose
     val header: APIHeader,
 
@@ -36,12 +36,11 @@ data class CityBody(
     val request: CityRequest,
 ): Serializable
 
-fun getCityBody(): CityBody {
+fun getCityRequestBody(): CityRequestBody {
     val apiKey: String = BuildConfig.TOKEN
     if (apiKey.isBlank()) {
         AppState.Error(Throwable("You need API key"))
     }
-    return CityBody(APIHeader(BuildConfig.TOKEN, APIMethods.GEO_CITY), CityRequest(3159))
-
-
+    return CityRequestBody(APIHeader(apiKey, APIMethods.GEO_CITY.value), CityRequest(APICountriesId.RUSSIA.value))
 }
+

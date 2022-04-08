@@ -19,5 +19,5 @@ interface HotelDao {
     fun getAll(): List<RoomHotel>
 
     @Query("SELECT * FROM RoomHotel WHERE cityId = :cityId")
-    fun getByCityId(cityId: String): List<RoomHotel>
+    fun getByCityId(cityId: Int?): List<RoomHotel>
 }

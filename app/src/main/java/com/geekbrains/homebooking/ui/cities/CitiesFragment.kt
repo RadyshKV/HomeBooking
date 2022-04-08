@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.homebooking.App
 import com.geekbrains.homebooking.R
 import com.geekbrains.homebooking.databinding.FragmentCitiesBinding
@@ -27,7 +26,6 @@ class CitiesFragment : MvpAppCompatFragment(), CitiesView, BackButtonListener {
     private val adapter by lazy {
         CitiesAdapter(
             presenter.citiesListRVPresenter,
-            //GlideImageLoader()
         )
     }
 

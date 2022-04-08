@@ -8,6 +8,8 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +24,7 @@ class NetworkModule {
     @Provides
     @Named(BASE_URL)
     fun baseUrl(): String {
-        return "https://api.github.com"
+        return "https://www.multitour.ru/api/v2/"
     }
 
     @Provides
@@ -40,14 +42,22 @@ class NetworkModule {
     }
 
     @Provides
+    fun createOkHttpClient(): OkHttpClient {
+        val httpClient = OkHttpClient.Builder()
+        httpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        return httpClient.build()
+    }
+
+    @Provides
     fun getRetrofit(
         @Named(BASE_URL) baseUrl: String,
         gson: Gson
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://www.multitour.ru/api/v2/")
+            .baseUrl(baseUrl)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(createOkHttpClient())
             .build()
     }
 

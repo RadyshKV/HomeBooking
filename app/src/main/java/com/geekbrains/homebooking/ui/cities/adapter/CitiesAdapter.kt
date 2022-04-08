@@ -1,9 +1,7 @@
 package com.geekbrains.homebooking.ui.cities.adapter
 
-import com.geekbrains.homebooking.ui.imageloading.ImageLoader
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.homebooking.databinding.ItemCityBinding
 import com.geekbrains.homebooking.ui.cities.CitiesPresenter
@@ -17,7 +15,7 @@ class CitiesAdapter(
 
     inner class CityViewHolder(private val vb: ItemCityBinding) : RecyclerView.ViewHolder(vb.root),
         CityItemView {
-        override fun setName(name: String) {
+        override fun setName(name: String?) {
             vb.citiesFragmentRecyclerItemTextView.text = name
         }
 

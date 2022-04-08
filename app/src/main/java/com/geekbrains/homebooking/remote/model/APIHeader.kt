@@ -8,5 +8,5 @@ data class APIHeader(
     val token: String,
 
     @Expose
-    val method: APIMethods,
+    val method: String,
 ): Serializable

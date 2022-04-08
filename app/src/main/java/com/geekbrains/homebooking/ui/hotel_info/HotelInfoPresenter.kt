@@ -17,15 +17,15 @@ class HotelInfoPresenter @AssistedInject constructor(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         setHotelName()
-        setHotelRating()
+        setHotelType()
     }
 
     private fun setHotelName() {
         viewState.setHotelName(hotelModel.name)
     }
 
-    private fun setHotelRating() {
-        viewState.setHotelRating(hotelModel.rating)
+    private fun setHotelType() {
+        viewState.setHotelType(hotelModel.type)
     }
 
     fun backPressed(): Boolean {

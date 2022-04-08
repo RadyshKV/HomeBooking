@@ -37,7 +37,7 @@ class HotelsPresenter @AssistedInject constructor(
 
     private fun loadData() {
 
-        hotelsRepository.getHotels(cityModel)
+        hotelsRepository.getHotels(cityModel, 10, 0)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showLoading() }
@@ -61,6 +61,8 @@ class HotelsPresenter @AssistedInject constructor(
         override fun bindView(view: HotelItemView) {
             val hotel = hotels[view.pos]
             view.setName(hotel.name)
+            view.setType(hotel.type)
+            view.loadImage(hotel.images.firstOrNull())
 
         }
 

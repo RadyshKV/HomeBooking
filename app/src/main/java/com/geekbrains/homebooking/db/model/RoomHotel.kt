@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.geekbrains.homebooking.model.Geo
 import com.google.gson.annotations.Expose
 
 
@@ -20,12 +21,26 @@ import com.google.gson.annotations.Expose
 data class RoomHotel(
     @PrimaryKey val id: String,
     val name: String,
-    val cityId: String,
-    val address: String,
-    val website: String,
-    val email: String,
-    val telephone: String,
-    val coord_w: String,
-    val coord_i: String,
-    val rating: Int,
+
+    val type: String,
+
+    val url: String,
+
+    val address: String?,
+
+    val countryId: Int?,
+
+    val regionId: Int?,
+
+    val resortId: Int?,
+
+    val cityId: Int?,
+
+    val lat: String?,
+
+    val lng: String?,
+
+   // val desc: String,
+
+    val image: String?,
 )

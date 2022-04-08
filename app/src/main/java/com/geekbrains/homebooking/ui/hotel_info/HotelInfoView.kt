@@ -8,5 +8,5 @@ interface HotelInfoView : MvpView {
     fun setHotelName(hotelName: String?)
 
     @AddToEndSingle
-    fun setHotelRating(hotelRating : Int)
+    fun setHotelType(hotelType : String)
 }

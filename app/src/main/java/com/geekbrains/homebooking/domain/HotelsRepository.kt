@@ -6,5 +6,5 @@ import io.reactivex.rxjava3.core.Single
 
 interface HotelsRepository {
 
-    fun getHotels(cityModel: CityModel): Single<List<HotelModel>>
+    fun getHotels(cityModel: CityModel, limit: Int, offset: Int): Single<List<HotelModel>>
 }

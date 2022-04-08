@@ -1,6 +1,6 @@
 package com.geekbrains.homebooking.remote.model
 
-enum class APIMethods(s: String) {
+enum class APIMethods(val value: String) {
     GEO_COUNTRY("Geo.Country"),
     GEO_REGION("Geo.Region"),
     GEO_RESORT("Geo.Resort"),
