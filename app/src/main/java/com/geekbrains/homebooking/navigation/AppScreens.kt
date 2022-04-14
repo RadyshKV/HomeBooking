@@ -10,7 +10,7 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 interface AppScreens{
     fun citiesScreen(): FragmentScreen
 
-    fun hotelsScreen(cityModel: CityModel): FragmentScreen
+    fun hotelsScreen(cityModel: CityModel?): FragmentScreen
 
     fun hotelInfoScreen(hotelModel: HotelModel): FragmentScreen
 }
@@ -21,7 +21,7 @@ class AppScreensImpl: AppScreens {
         CitiesFragment()
     }
 
-    override fun hotelsScreen(cityModel: CityModel) = FragmentScreen {
+    override fun hotelsScreen(cityModel: CityModel?) = FragmentScreen {
         HotelsFragment.newInstance(cityModel)
     }
 

@@ -22,7 +22,7 @@ class HotelsAdapter (
             vb.hotelsName.text = name
         }
 
-        override fun setType(type: String) {
+        override fun setType(type: String?) {
             vb.hotelsType.text = type
         }
 

@@ -2,10 +2,7 @@ package com.geekbrains.homebooking.db.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.geekbrains.homebooking.model.Geo
-import com.google.gson.annotations.Expose
 
 
 @Entity(
@@ -22,9 +19,9 @@ data class RoomHotel(
     @PrimaryKey val id: String,
     val name: String,
 
-    val type: String,
+    val type: String?,
 
-    val url: String,
+    val url: String?,
 
     val address: String?,
 

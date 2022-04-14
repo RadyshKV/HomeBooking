@@ -41,24 +41,12 @@
         android:paddingHorizontal="@dimen/margin_15_dp"
         android:paddingBottom="@dimen/margin_15_dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_edit_text"
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/input_city_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <ListView
-        android:id="@+id/input_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/input_layout"
-        app:layout_constraintEnd_toEndOf="@id/input_layout"
-        app:layout_constraintStart_toStartOf="@id/input_layout"
-        android:visibility="gone"
-        android:paddingHorizontal="@dimen/margin_15_dp"
-        tools:visibility="visible"
-        tools:listitem="Москва"/>
 
     <TextView
         android:id="@+id/recycler_title"

@@ -11,7 +11,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.homebooking.App
-import com.geekbrains.homebooking.R
 import com.geekbrains.homebooking.databinding.FragmentHotelsBinding
 import com.geekbrains.homebooking.ui.hotels.adapter.HotelsAdapter
 import com.geekbrains.homebooking.ui.imageloading.GlideImageLoader
@@ -62,7 +61,7 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
 
     override fun onResume() {
         super.onResume()
-        requireActivity().title = cityModel.name
+        requireActivity().title = cityModel.name ?: cityModel.resort_name ?: cityModel.region_name
     }
 
     override fun showLoading() {
@@ -83,7 +82,7 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
 
     companion object {
         private const val KEY_CITY_MODEL = "KEY_CITY_MODEL"
-        fun newInstance(cityModel: CityModel): HotelsFragment {
+        fun newInstance(cityModel: CityModel?): HotelsFragment {
             return HotelsFragment().apply {
                 arguments = bundleOf(KEY_CITY_MODEL to cityModel)
             }

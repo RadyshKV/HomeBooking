@@ -12,10 +12,10 @@ data class HotelModel(
     val name: String,
 
     @Expose
-    val type: String,
+    val type: String?,
 
     @Expose
-    val url: String,
+    val url: String?,
 
     @Expose
     val address: String?,

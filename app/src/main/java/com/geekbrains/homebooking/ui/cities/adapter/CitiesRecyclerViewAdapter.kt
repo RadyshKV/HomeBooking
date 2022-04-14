@@ -8,10 +8,10 @@ import com.geekbrains.homebooking.ui.cities.CitiesPresenter
 import com.geekbrains.homebooking.ui.cities.CityItemView
 
 
-class CitiesAdapter(
-    private val presenter: CitiesPresenter.CitiesListRVPresenter,
+class CitiesRecyclerViewAdapter(
+    private val presenter: CitiesPresenter.CitiesRecyclerViewPresenter,
     //private val imageLoader: ImageLoader<ImageView>
-) : RecyclerView.Adapter<CitiesAdapter.CityViewHolder>() {
+) : RecyclerView.Adapter<CitiesRecyclerViewAdapter.CityViewHolder>() {
 
     inner class CityViewHolder(private val vb: ItemCityBinding) : RecyclerView.ViewHolder(vb.root),
         CityItemView {

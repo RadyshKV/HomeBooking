@@ -18,23 +18,24 @@ class CitiesPresenter @Inject constructor(
 ) : MvpPresenter<CitiesView>() {
 
     val citiesListPresenter = CitiesListPresenter()
-    val citiesListRVPresenter = CitiesListRVPresenter()
+    val citiesRecyclerViewPresenter = CitiesRecyclerViewPresenter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        Log.d("CitiesPresenter", "onFirstViewAttach")
         loadData()
-        citiesListPresenter.itemClickListener = {
+        citiesListPresenter.itemClickListener = {cityName ->
             router.navigateTo(
                 appScreens.hotelsScreen(
-                    citiesListPresenter.cities[it.pos]
+                    citiesListPresenter.cities.find{it.name.equals(cityName)}
                 )
             )
         }
 
-        citiesListRVPresenter.itemClickListener = {
+        citiesRecyclerViewPresenter.itemClickListener = {
             router.navigateTo(
                 appScreens.hotelsScreen(
-                   citiesListRVPresenter.cities[it.pos]
+                   citiesRecyclerViewPresenter.popularCities[it.pos]
                 )
             )
         }
@@ -42,7 +43,7 @@ class CitiesPresenter @Inject constructor(
 
     private fun loadData() {
 
-        citiesListRVPresenter.cities.addAll(getCities())
+        citiesRecyclerViewPresenter.popularCities.addAll(getCities())
 
         citiesRepository.getCities()
             .subscribeOn(Schedulers.io())
@@ -53,6 +54,7 @@ class CitiesPresenter @Inject constructor(
                     citiesListPresenter.cities.addAll(cities)
                     viewState.updateList()
                     viewState.hideLoading()
+                    Log.d("Retrofit", "все ok")
                 }, { e ->
                     Log.e("Retrofit", "Ошибка при получении городов", e)
                     viewState.hideLoading()
@@ -60,31 +62,29 @@ class CitiesPresenter @Inject constructor(
             )
     }
 
-    class CitiesListPresenter : IListPresenter<CityItemView> {
+    class CitiesListPresenter {
+
         val cities = mutableListOf<CityModel>()
 
-        override var itemClickListener: ((CityItemView) -> Unit)? = {}
-
-        override fun bindView(view: CityItemView) {
-            val city = cities[view.pos]
-            view.setName(city.name)
-            //view.loadImage(city.imageUrl)
+        fun getCitiesNameList(): List<String?> {
+           return cities.map { it.name }
         }
 
-        override fun getCount() = cities.size
+        var itemClickListener: ((String) -> Unit)? = {}
+
     }
 
-    class CitiesListRVPresenter : IListPresenter<CityItemView> {
-        val cities = mutableListOf<CityModel>()
+    class CitiesRecyclerViewPresenter : IListPresenter<CityItemView> {
+        val popularCities = mutableListOf<CityModel>()
 
-        override var itemClickListener: ((CityItemView) -> Unit)? = {}
+         override var itemClickListener: ((CityItemView) -> Unit)? = {}
 
         override fun bindView(view: CityItemView) {
             view.setName(getCityName()[view.pos])
             view.loadImage(getCityImage()[view.pos])
         }
 
-        override fun getCount() = cities.size
+        override fun getCount() = popularCities.size
     }
 
     fun backPressed(): Boolean {
