@@ -2,6 +2,7 @@ package com.geekbrains.homebooking.ui.imageloading
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.geekbrains.homebooking.R
 
 class GlideImageLoader : ImageLoader<ImageView> {
 
@@ -9,7 +10,8 @@ class GlideImageLoader : ImageLoader<ImageView> {
         Glide.with(container.context)
             .asBitmap()
             .load(url)
-            //.circleCrop()
+            .centerCrop()
+            .error(R.drawable.ic_baseline_image_24)
             .into(container)
     }
 }

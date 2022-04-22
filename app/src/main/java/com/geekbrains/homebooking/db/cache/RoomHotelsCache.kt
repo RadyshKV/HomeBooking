@@ -21,7 +21,7 @@ class RoomHotelsCache(
                     hotel.images.firstOrNull()
                 )
             }
-                //db.hotelDao.insert(roomHotels)
+                db.hotelDao.insert(roomHotels)
             hotels
         }
     }

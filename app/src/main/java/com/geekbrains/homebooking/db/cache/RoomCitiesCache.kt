@@ -14,7 +14,7 @@ class RoomCitiesCache(
             val roomCities = cities.map { city ->
                 RoomCity(city.id, city.name ,city.region_id, city.region_name, city.resort_id, city.resort_name)
             }
-            //db.cityDao.insert(roomCities)
+            db.cityDao.insert(roomCities)
             cities
         }
     }

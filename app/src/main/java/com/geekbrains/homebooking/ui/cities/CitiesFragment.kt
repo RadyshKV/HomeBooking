@@ -1,10 +1,12 @@
 package com.geekbrains.homebooking.ui.cities
 
+import android.content.Context
 import com.geekbrains.homebooking.ui.base.BackButtonListener
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -57,7 +59,9 @@ class CitiesFragment : MvpAppCompatFragment(), CitiesView, BackButtonListener {
         binding.inputCityText.threshold = 1
         binding.citiesFragmentRecyclerView.adapter = recyclerViewAdapter
         binding.inputCityText.setOnItemClickListener { parent, _, position, id ->
-            presenter.citiesListPresenter.itemClickListener?.let { it(parent.getItemAtPosition(position).toString()) }
+            presenter.citiesListPresenter.itemClickListener?.let {
+                it(parent.getItemAtPosition(position).toString())
+            }
         }
 
 
@@ -67,6 +71,8 @@ class CitiesFragment : MvpAppCompatFragment(), CitiesView, BackButtonListener {
         super.onResume()
         requireActivity().setTitle(R.string.app_name)
     }
+
+
 
     override fun showLoading() {
         binding.citiesFragmentLoadingLayout.isVisible = true

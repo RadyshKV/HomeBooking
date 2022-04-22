@@ -37,6 +37,24 @@ class HotelsPresenter @AssistedInject constructor(
 
     private fun loadData() {
 
+        hotelsRepository.getHotels(cityModel, 1000, 0)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { viewState.showLoading() }
+            .subscribe(
+                { hotels ->
+                    hotelsListPresenter.hotels.addAll(hotels)
+                    viewState.updateList()
+                    viewState.hideLoading()
+                }, { e ->
+                    Log.e("Retrofit", "Ошибка при получении отелей", e)
+                    viewState.hideLoading()
+                }
+            )
+    }
+
+    private fun reLoadData() {
+
         hotelsRepository.getHotels(cityModel, 10, 0)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

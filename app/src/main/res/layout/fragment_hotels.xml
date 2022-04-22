@@ -18,6 +18,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/date_in"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:boxBackgroundColor="@color/white"
@@ -28,14 +29,17 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_date_in"
-                android:layout_width="120dp"
+                android:layout_width="118dp"
                 android:layout_height="wrap_content"
-                android:inputType = "date"
+                android:textSize="12sp"
+                android:focusable="false"
+                tools:text="22.02.2022"
                 android:hint="Заезд"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/date_out"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:boxBackgroundColor="@color/white"
@@ -45,16 +49,20 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_date_out"
-                android:layout_width="120dp"
+                android:layout_width="118dp"
                 android:layout_height="wrap_content"
-                android:hint="Выезд" />
+                android:focusable="false"
+                android:hint="Выезд"
+                android:textSize="12sp"
+                tools:text="22.02.2022" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="80dp"
-            android:layout_height="match_parent" />
+       <Spinner
+            android:id="@+id/spinner_guests"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_find"
