@@ -11,6 +11,8 @@ data class OfferModel(
     @Expose
     val hotel_id: Int,
 
+    val city_id: Int,
+
     @Expose
     val price: Int?,
 

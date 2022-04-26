@@ -61,10 +61,10 @@ fun getOfferRequestBody(
     regionId: Int?,
     resortId: Int?,
     cityId: Int?,
-    hotelId: Int,
+    hotelId: Int?,
     dateBegin: String,
     dateEnd: String,
-    adult: Int
+    adult: Int,
 ): OfferRequestBody {
     val apiKey: String = BuildConfig.TOKEN
     if (apiKey.isBlank()) {

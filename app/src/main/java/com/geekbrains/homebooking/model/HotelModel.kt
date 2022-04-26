@@ -6,7 +6,7 @@ import java.io.Serializable
 data class HotelModel(
 
     @Expose
-    val id: String,
+    val id: Int,
 
     @Expose
     val name: String,

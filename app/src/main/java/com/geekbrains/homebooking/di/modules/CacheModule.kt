@@ -3,10 +3,7 @@ package com.geekbrains.homebooking.di.modules
 import android.content.Context
 import androidx.room.Room
 import com.geekbrains.homebooking.db.AppDatabase
-import com.geekbrains.homebooking.db.cache.IHotelsCache
-import com.geekbrains.homebooking.db.cache.ICitiesCache
-import com.geekbrains.homebooking.db.cache.RoomHotelsCache
-import com.geekbrains.homebooking.db.cache.RoomCitiesCache
+import com.geekbrains.homebooking.db.cache.*
 import dagger.Module
 import dagger.Provides
 
@@ -30,4 +27,10 @@ class CacheModule {
     fun hotelsCache(db: AppDatabase): IHotelsCache {
         return RoomHotelsCache(db)
     }
+
+    @Provides
+    fun offersCache(db: AppDatabase):IOffersCache{
+        return RoomOffersCache(db)
+    }
+
 }

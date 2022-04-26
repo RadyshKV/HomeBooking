@@ -16,7 +16,9 @@ import androidx.room.PrimaryKey
     ]
 )
 data class RoomHotel(
-    @PrimaryKey val id: String,
+
+    @PrimaryKey val id: Int,
+
     val name: String,
 
     val type: String?,

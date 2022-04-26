@@ -1,9 +1,6 @@
 package com.geekbrains.homebooking.di.modules
 
-import com.geekbrains.homebooking.domain.HotelsRepository
-import com.geekbrains.homebooking.domain.HotelsRepositoryImpl
-import com.geekbrains.homebooking.domain.CitiesRepository
-import com.geekbrains.homebooking.domain.CitiesRepositoryImpl
+import com.geekbrains.homebooking.domain.*
 
 import dagger.Binds
 import dagger.Module
@@ -20,4 +17,7 @@ abstract class RepositoryModule {
     @Binds
     abstract fun bindsHotelsRepository (impl: HotelsRepositoryImpl): HotelsRepository
 
+    @Singleton
+    @Binds
+    abstract fun bindsOfferRepository (impl: OffersRepositoryImpl): OffersRepository
 }
