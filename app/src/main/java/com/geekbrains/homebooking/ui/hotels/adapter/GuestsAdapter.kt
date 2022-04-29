@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.geekbrains.homebooking.R
 import com.geekbrains.homebooking.databinding.SpinnerDropDownLayoutBinding
+import com.geekbrains.homebooking.ui.hotels.HotelsPresenter
 
 
 class GuestsAdapter(val context: Context, private var dataSource: List<Guest>) : BaseAdapter() {
@@ -33,6 +34,7 @@ class GuestsAdapter(val context: Context, private var dataSource: List<Guest>) :
             //view = inflater.inflate(R.layout.custom_spinner_item, parent, false)
             vh = ItemHolder(binding)
             view.tag = vh
+            //view.setOnClickListener { presenter.setAdult(position) }
         } else {
             view = convertView
             vh = view.tag as ItemHolder
@@ -59,6 +61,7 @@ class GuestsAdapter(val context: Context, private var dataSource: List<Guest>) :
     private class ItemHolder(vb: SpinnerDropDownLayoutBinding) {
         val label: TextView = vb.nameTextView
         val img: ImageView = vb.imageIcon
+
 
     }
 

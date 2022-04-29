@@ -9,4 +9,11 @@ interface HotelInfoView : MvpView {
 
     @AddToEndSingle
     fun setHotelType(hotelType: String?)
+
+    @AddToEndSingle
+    fun setHotelAddress(hotelAddress: String?)
+
+    @AddToEndSingle
+    fun updateList()
+
 }

@@ -5,6 +5,7 @@ import com.geekbrains.homebooking.model.HotelModel
 import com.geekbrains.homebooking.db.AppDatabase
 import com.geekbrains.homebooking.db.model.RoomHotel
 import com.geekbrains.homebooking.model.Geo
+import com.geekbrains.homebooking.model.OfferModel
 import io.reactivex.rxjava3.core.Single
 
 class RoomHotelsCache(
@@ -35,7 +36,8 @@ class RoomHotelsCache(
                         listOf(roomModel.countryId), listOf(roomModel.regionId), listOf(roomModel.resortId),
                         listOf(roomModel.cityId), roomModel.lat, roomModel.lng
                     ),
-                    listOf(roomModel.image)
+                    listOf(roomModel.image),
+                    emptyList<OfferModel?>().toMutableList()
                 )
             }
         }

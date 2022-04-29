@@ -16,71 +16,77 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <ImageView
-            android:id="@+id/image_hotel"
-            android:layout_width="250dp"
-            android:layout_height="200dp"
-            android:cropToPadding="true"
-            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/hotels_type"
+                android:id="@+id/acc_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/recycler_item_padding"
                 android:textSize="@dimen/recycler_item_text_size"
-                android:textStyle="italic"
-                tools:text="гостиница"/>
+                tools:text="acc_name"/>
 
             <TextView
-                android:id="@+id/hotels_name"
+                android:id="@+id/room_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/recycler_item_padding"
                 android:textSize="@dimen/recycler_item_text_size"
-                android:textStyle="bold"
-                tools:text="Огни Москвы" />
+                tools:text="room_name" />
 
 
             <TextView
+                android:id="@+id/meal_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/recycler_item_padding"
                 android:textSize="@dimen/recycler_item_text_size"
-                android:text="Предложений:"/>
+                tools:text="meal_name:"/>
 
             <TextView
-                android:id="@+id/offers"
+                android:id="@+id/tariff_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
                 android:textSize="@dimen/recycler_item_text_size"
-                android:textColor="@color/primaryColor"
-                tools:text="5"/>
+                tools:text="tariff_name"/>
 
 
             <TextView
+                android:id="@+id/nights"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/recycler_item_padding"
                 android:textSize="@dimen/recycler_item_text_size"
-                android:text="Цена от:"/>
+                tools:text="nights"/>
 
             <TextView
-                android:id="@+id/minCost"
+                android:id="@+id/date_begin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
                 android:textSize="@dimen/recycler_item_text_size"
-                android:textColor="@color/primaryColor"
-                tools:text="5 000"/>
+                tools:text="date_begin" />
+
+            <TextView
+                android:id="@+id/date_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/recycler_item_text_size"
+                tools:text="date_end"/>
+
+            <TextView
+                android:id="@+id/quote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/recycler_item_text_size"
+                tools:text="quote"/>
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/image_hotel"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:cropToPadding="true"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

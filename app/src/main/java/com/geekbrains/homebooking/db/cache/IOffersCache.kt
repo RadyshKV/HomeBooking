@@ -5,7 +5,7 @@ import com.geekbrains.homebooking.model.HotelModel
 import com.geekbrains.homebooking.model.OfferModel
 import io.reactivex.rxjava3.core.Single
 
-internal interface IOffersCache {
+interface IOffersCache {
 
     fun setOffers(offers: List<OfferModel>): Single<List<OfferModel>>
 

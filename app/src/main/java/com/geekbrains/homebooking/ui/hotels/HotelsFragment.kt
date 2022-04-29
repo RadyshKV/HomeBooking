@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import android.widget.DatePicker
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -28,16 +29,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-
 class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
-    private var dateIn = Calendar.getInstance()
-    private var dateOut = Calendar.getInstance()
-    private val dateFormat = "dd.MM.yyyy" // mention the format you need
-    private val simpleDateFormat = SimpleDateFormat(dateFormat, Locale.getDefault())
+    private val dateViewFormat = "dd.MM.yyyy"
+    private val simpleDateViewFormat = SimpleDateFormat(dateViewFormat, Locale.getDefault())
+    private val calendar = Calendar.getInstance()
 
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.hotelsPresenterFactory().presenter(cityModel)
+        App.instance.appComponent.hotelsPresenterFactory().presenter(
+            cityModel
+        )
     }
     private var _binding: FragmentHotelsBinding? = null
     private val binding
@@ -51,17 +52,19 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
     }
 
     // установка обработчика выбора даты
-    private var dateInListener =
+    private var dateBeginListener =
         OnDateSetListener { view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-
-            setInitialDateIn(year, monthOfYear, dayOfMonth)
+            calendar.set(year, monthOfYear, dayOfMonth)
+            presenter.setdateBegin(calendar)
+            setDateBegin(calendar)
         }
 
     // установка обработчика выбора даты
-    private var dateOutListener =
+    private var dateEndListener =
         OnDateSetListener { view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-
-            setInitialDateOut(year, monthOfYear, dayOfMonth)
+            calendar.set(year, monthOfYear, dayOfMonth)
+            presenter.setDateEnd(calendar)
+            setDateEnd(calendar)
         }
 
     // отображаем диалоговое окно для выбора даты
@@ -73,22 +76,6 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
             date[Calendar.DAY_OF_MONTH]
         )
             .show()
-    }
-
-    // установка начальных даты и времени
-    private fun setInitialDateIn(year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        dateIn[Calendar.YEAR] = year
-        dateIn[Calendar.MONTH] = monthOfYear
-        dateIn[Calendar.DAY_OF_MONTH] = dayOfMonth
-        binding.inputDateIn.setText(simpleDateFormat.format(dateIn.time))
-    }
-
-    // установка начальных даты и времени
-    private fun setInitialDateOut(year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        dateOut[Calendar.YEAR] = year
-        dateOut[Calendar.MONTH] = monthOfYear
-        dateOut[Calendar.DAY_OF_MONTH] = dayOfMonth
-        binding.inputDateOut.setText(simpleDateFormat.format(dateOut.time))
     }
 
     private val cityModel: CityModel by lazy {
@@ -117,21 +104,38 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
             )
         )
         binding.dateIn.setEndIconOnClickListener {
-            setDate(it, dateInListener, dateIn)
+            calendar.time = simpleDateViewFormat.parse(binding.inputDateIn.text.toString())!!
+            setDate(it, dateBeginListener, calendar)
         }
 
         binding.dateOut.setEndIconOnClickListener {
-            setDate(it, dateOutListener, dateOut)
+            calendar.time = simpleDateViewFormat.parse(binding.inputDateOut.text.toString())!!
+            setDate(it, dateEndListener, calendar)
         }
 
         binding.inputDateIn.setOnClickListener {
-            setDate(it, dateInListener, dateIn)
+            calendar.time = simpleDateViewFormat.parse(binding.inputDateIn.text.toString())!!
+            setDate(it, dateBeginListener, calendar)
         }
         binding.inputDateOut.setOnClickListener {
-            setDate(it, dateOutListener, dateOut)
+            calendar.time = simpleDateViewFormat.parse(binding.inputDateOut.text.toString())!!
+            setDate(it, dateEndListener, calendar)
         }
-        binding.buttonFind.setOnClickListener {  }
+        binding.spinnerGuests.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                presenter.setAdult(position)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+
+        binding.buttonFind.setOnClickListener {
+            presenter.reLoadData()
+        }
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -147,6 +151,7 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
             if (showKeyboard) InputMethodManager.SHOW_FORCED else InputMethodManager.HIDE_NOT_ALWAYS
         )
     }
+
     override fun showLoading() {
         binding.hotelsFragmentLoadingLayout.isVisible = true
         binding.hotelsFragmentRecyclerView.isVisible = false
@@ -160,6 +165,17 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
     @SuppressLint("NotifyDataSetChanged")
     override fun updateList() {
         adapter.notifyDataSetChanged()
+    }
+
+    override fun setDateBegin(date: Calendar) {
+        binding.inputDateIn.setText(simpleDateViewFormat.format(date.time))
+    }
+
+    override fun setDateEnd(date: Calendar) {
+        binding.inputDateOut.setText(simpleDateViewFormat.format(date.time))    }
+
+    override fun setAdult(adult: Int) {
+        binding.spinnerGuests.setSelection(adult)
     }
 
     override fun backPressed() = presenter.backPressed()

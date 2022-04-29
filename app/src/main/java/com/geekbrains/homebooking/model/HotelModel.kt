@@ -29,6 +29,8 @@ data class HotelModel(
     @Expose
     val images: List<String?>,
 
+    var offers: List<OfferModel?>,
+
     ) : Serializable
 
 data class Geo(

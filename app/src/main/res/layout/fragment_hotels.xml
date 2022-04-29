@@ -29,12 +29,12 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_date_in"
-                android:layout_width="118dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
                 android:focusable="false"
-                tools:text="22.02.2022"
-                android:hint="Заезд"/>
+                android:hint="Заезд"
+                android:textSize="11sp"
+                tools:text="22.02.2022" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -49,29 +49,30 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_date_out"
-                android:layout_width="118dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:hint="Выезд"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 tools:text="22.02.2022" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-       <Spinner
+        <Spinner
             android:id="@+id/spinner_guests"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="match_parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_find"
-            android:layout_width="match_parent"
+            android:layout_width="49dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:drawableStart="@drawable/ic_baseline_search_24"
-            app:iconGravity="end"
-            android:drawableTint="@color/white"/>
+            android:drawableTint="@color/white"
+            app:icon="@drawable/ic_baseline_search_24"
+            app:iconSize="20dp"
+
+            tools:ignore="UnusedAttribute" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

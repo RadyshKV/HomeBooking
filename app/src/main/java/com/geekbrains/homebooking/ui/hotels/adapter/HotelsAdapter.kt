@@ -26,6 +26,13 @@ class HotelsAdapter (
             vb.hotelsType.text = type
         }
 
+        override fun setOffers(offers: Int?) {
+            vb.offers.text = offers.toString()
+        }
+
+        override fun setMinCost(cost: Int?) {
+            vb.minCost.text = cost.toString()
+        }
 
 
         override var pos: Int = -1

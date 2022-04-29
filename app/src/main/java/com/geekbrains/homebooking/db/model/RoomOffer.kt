@@ -14,12 +14,12 @@ import com.google.gson.annotations.Expose
             childColumns = ["hotelId"],
             onDelete = ForeignKey.CASCADE
         ),
-        ForeignKey(
-            entity = RoomCity::class,
-            parentColumns = ["id"],
-            childColumns = ["cityId"],
-            onDelete = ForeignKey.CASCADE
-        )
+//        ForeignKey(
+//            entity = RoomCity::class,
+//            parentColumns = ["id"],
+//            childColumns = ["cityId"],
+//            onDelete = ForeignKey.CASCADE
+//        )
     ]
 )
 data class RoomOffer(
@@ -28,7 +28,7 @@ data class RoomOffer(
 
     val hotelId: Int,
 
-    val cityId: Int,
+    val cityId: Int?,
 
     val price: Int?,
 
