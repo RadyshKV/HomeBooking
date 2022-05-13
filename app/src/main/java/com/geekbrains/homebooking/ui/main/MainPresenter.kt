@@ -16,6 +16,14 @@ class MainPresenter @Inject constructor(
         router.replaceScreen(appScreens.citiesScreen())
     }
 
+    fun findButtonPressed(){
+        router.replaceScreen(appScreens.citiesScreen())
+    }
+
+    fun signinButtonPressed(){
+        router.navigateTo(appScreens.loginScreen())
+    }
+
     fun backPressed(){
         router.exit()
     }

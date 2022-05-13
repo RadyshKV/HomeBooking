@@ -1,19 +1,14 @@
 package com.geekbrains.homebooking.ui.cities
 
-import android.content.Context
 import com.geekbrains.homebooking.ui.base.BackButtonListener
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import com.geekbrains.homebooking.App
 import com.geekbrains.homebooking.R
 import com.geekbrains.homebooking.databinding.FragmentCitiesBinding
-import com.geekbrains.homebooking.model.getCityName
 import com.geekbrains.homebooking.ui.cities.adapter.CitiesRecyclerViewAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
