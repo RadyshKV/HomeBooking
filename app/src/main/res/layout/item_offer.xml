@@ -30,14 +30,6 @@
                 tools:text="acc_name"/>
 
             <TextView
-                android:id="@+id/room_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/recycler_item_text_size"
-                tools:text="room_name" />
-
-
-            <TextView
                 android:id="@+id/meal_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

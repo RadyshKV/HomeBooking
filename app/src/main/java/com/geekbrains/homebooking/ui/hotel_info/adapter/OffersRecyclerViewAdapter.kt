@@ -4,74 +4,67 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.homebooking.databinding.ItemOfferBinding
+import com.geekbrains.homebooking.databinding.ItemRoomBinding
+import com.geekbrains.homebooking.model.OfferModel
 import com.geekbrains.homebooking.ui.hotel_info.HotelInfoPresenter
-import com.geekbrains.homebooking.ui.hotel_info.OfferItemView
 
 
 class OffersRecyclerViewAdapter(
     private val presenter: HotelInfoPresenter.OffersListPresenter,
-//private val imageLoader: ImageLoader<ImageView>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-) : RecyclerView.Adapter<OffersRecyclerViewAdapter.OfferViewHolder>() {
+
+    inner class RoomViewHolder(private val vb: ItemRoomBinding) :
+        RecyclerView.ViewHolder(vb.root) {
+
+        fun bind(cell: CellRoom) {
+            vb.roomName.text = cell.roomName
+        }
+    }
 
     inner class OfferViewHolder(private val vb: ItemOfferBinding) :
-        RecyclerView.ViewHolder(vb.root),
-        OfferItemView {
-        override fun setAccName(accName: String?) {
-            vb.accName.text = accName
-        }
+        RecyclerView.ViewHolder(vb.root) {
 
-        override fun setRoomName(roomName: String?) {
-            vb.roomName.text = roomName
-        }
-
-        override fun setMealName(mealName: String?) {
-            vb.mealName.text = mealName
-        }
-
-        override fun setTariffName(tariffName: String?) {
-            vb.tariffName.text = tariffName
-        }
-
-        override fun setNights(nights: Int?) {
-            vb.nights.text = nights.toString()
-        }
-
-        override fun setQuote(quote: Int?) {
-            vb.quote.text = quote.toString()
-        }
-
-        override fun setDateEnd(dateEnd: String?) {
-            vb.dateEnd.text = dateEnd
-        }
-
-        override fun setDateBegin(dateBegin: String?) {
-            vb.dateBegin.text = dateBegin
-        }
-
-        override var pos: Int = -1
-
-//        override fun loadImage(imageUrl: String?) {
-//            imageLoader.loadInto(imageUrl, vb.imageHotel)
-//        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferViewHolder {
-        return OfferViewHolder(
-            ItemOfferBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        ).apply {
-            itemView.setOnClickListener { presenter.itemClickListener?.invoke(this) }
+        fun bind(cell: CellOffer) {
+            vb.accName.text =  cell.offer?.acc_name
+            vb.tariffName.text = cell.offer?.tariff_name
+            vb.mealName.text = cell.offer?.meal_name
+            vb.dateBegin.text =cell.offer?.date_begin
+            vb.dateEnd.text =cell.offer?.date_end
+            vb.nights.text = cell.offer?.nights.toString()
+            vb.quote.text = cell.offer?.quote.toString()
         }
     }
 
-    override fun onBindViewHolder(holder: OfferViewHolder, position: Int) {
-        presenter.bindView(holder.apply {
-            pos = position
-        })
+    override fun getItemViewType(position: Int) = presenter.items[position].identifier()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            CellOffer::class.java.name.hashCode() ->
+                OfferViewHolder(
+                    ItemOfferBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            CellRoom::class.java.name.hashCode() ->
+                RoomViewHolder(
+                    ItemRoomBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            else -> throw IllegalArgumentException("Unsupported layout") // in case populated with a model we don't know how to display.
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (val item = presenter.items[holder.adapterPosition]) {
+            is CellOffer -> (holder as OfferViewHolder).bind(item)
+            is CellRoom -> (holder as RoomViewHolder).bind(item)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -79,3 +72,15 @@ class OffersRecyclerViewAdapter(
     }
 
 }
+
+open class Cell {
+    fun identifier() = this::class.java.name.hashCode()
+}
+
+class CellOffer(
+    val offer: OfferModel?
+) : Cell()
+
+class CellRoom(
+    val roomName: String
+) : Cell()

@@ -58,8 +58,6 @@ class CitiesFragment : MvpAppCompatFragment(), CitiesView, BackButtonListener {
                 it(parent.getItemAtPosition(position).toString())
             }
         }
-
-
     }
 
     override fun onResume() {

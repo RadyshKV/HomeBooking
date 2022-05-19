@@ -3,6 +3,9 @@ package com.geekbrains.homebooking.ui.hotel_info
 import com.geekbrains.homebooking.model.HotelModel
 import com.geekbrains.homebooking.model.OfferModel
 import com.geekbrains.homebooking.ui.base.IListPresenter
+import com.geekbrains.homebooking.ui.hotel_info.adapter.Cell
+import com.geekbrains.homebooking.ui.hotel_info.adapter.CellOffer
+import com.geekbrains.homebooking.ui.hotel_info.adapter.CellRoom
 import com.github.terrakok.cicerone.Router
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -30,6 +33,7 @@ class HotelInfoPresenter @AssistedInject constructor(
 
     private fun setOfferList() {
         offersListPresenter.offers.addAll(hotelModel.offers)
+        offersListPresenter.addItems()
         viewState.updateList()
     }
 
@@ -45,23 +49,26 @@ class HotelInfoPresenter @AssistedInject constructor(
         viewState.setHotelAddress(hotelModel.address)
     }
 
-    class OffersListPresenter : IListPresenter<OfferItemView> {
+    class OffersListPresenter {
+        var items: ArrayList<Cell> = ArrayList()
         val offers = mutableListOf<OfferModel?>()
 
-        override var itemClickListener: ((OfferItemView) -> Unit)? = {}
+        fun getCount() = items.size
 
-        override fun bindView(view: OfferItemView) {
-            val offer = offers[view.pos]
-            view.setAccName(offer?.acc_name)
-            view.setRoomName(offer?.room_name)
-            view.setTariffName(offer?.tariff_name)
-            view.setDateBegin(offer?.date_begin)
-            view.setDateEnd(offer?.date_end)
-            view.setMealName(offer?.meal_name)
-            view.setNights(offer?.nights)
-            view.setQuote(offer?.quote)
+        fun addItems() {
+            val rooms = mutableListOf<String?>()
+            offers.forEach {
+                rooms.add(it?.room_name)
+            }
+            val listRooms = rooms.distinct()
+            listRooms.forEach{ roomName->
+                items.add(CellRoom(roomName.toString()))
+                offers.forEach { offer->
+                    if (offer?.room_name.equals(roomName))
+                        items.add(CellOffer(offer))
+                }
+            }
         }
-        override fun getCount() = offers.size
     }
 
     fun backPressed(): Boolean {
@@ -71,6 +78,6 @@ class HotelInfoPresenter @AssistedInject constructor(
 }
 
 @AssistedFactory
-interface HotelInfoPresenterFactory{
+interface HotelInfoPresenterFactory {
     fun presenter(hotelModel: HotelModel): HotelInfoPresenter
 }

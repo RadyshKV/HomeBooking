@@ -23,4 +23,10 @@ interface HotelsView : MvpView {
     @AddToEndSingle
     fun hideLoading()
 
+    @AddToEndSingle
+    fun showEmptyText()
+
+    @AddToEndSingle
+    fun hideEmptyText()
+
 }

@@ -1,5 +1,6 @@
 package com.geekbrains.homebooking.ui.main
 
+import com.geekbrains.homebooking.model.AuthorizationState
 import com.geekbrains.homebooking.navigation.AppScreens
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
@@ -12,7 +13,7 @@ class MainPresenter @Inject constructor(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-
+        AuthorizationState.readPref()
         router.replaceScreen(appScreens.citiesScreen())
     }
 

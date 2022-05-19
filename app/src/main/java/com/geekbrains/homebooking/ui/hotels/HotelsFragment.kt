@@ -55,7 +55,7 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
     private var dateBeginListener =
         OnDateSetListener { view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
             calendar.set(year, monthOfYear, dayOfMonth)
-            presenter.setdateBegin(calendar)
+            presenter.setDateBegin(calendar)
             setDateBegin(calendar)
         }
 
@@ -152,6 +152,8 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
         )
     }
 
+
+
     override fun showLoading() {
         binding.hotelsFragmentLoadingLayout.isVisible = true
         binding.hotelsFragmentRecyclerView.isVisible = false
@@ -160,6 +162,14 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
     override fun hideLoading() {
         binding.hotelsFragmentLoadingLayout.isVisible = false
         binding.hotelsFragmentRecyclerView.isVisible = true
+    }
+
+    override fun showEmptyText() {
+        binding.emptyText.isVisible = true
+    }
+
+    override fun hideEmptyText() {
+        binding.emptyText.isVisible = false
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -172,7 +182,8 @@ class HotelsFragment : MvpAppCompatFragment(), HotelsView, BackButtonListener {
     }
 
     override fun setDateEnd(date: Calendar) {
-        binding.inputDateOut.setText(simpleDateViewFormat.format(date.time))    }
+        binding.inputDateOut.setText(simpleDateViewFormat.format(date.time))
+    }
 
     override fun setAdult(adult: Int) {
         binding.spinnerGuests.setSelection(adult)

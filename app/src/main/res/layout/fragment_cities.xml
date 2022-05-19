@@ -72,6 +72,8 @@
         android:paddingHorizontal="5dp"
         android:clipToPadding="false"/>
 
+
+
     <FrameLayout
         android:id="@+id/citiesFragmentLoadingLayout"
         android:layout_width="match_parent"

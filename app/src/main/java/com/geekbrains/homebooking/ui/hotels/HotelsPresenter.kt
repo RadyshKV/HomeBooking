@@ -17,7 +17,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class HotelsPresenter @AssistedInject constructor(
     private val router: Router,
@@ -65,26 +64,7 @@ class HotelsPresenter @AssistedInject constructor(
                 { hotels ->
                     allHotels.clear()
                     allHotels.addAll(hotels)
-                    offersRepository.getOffers(cityModel, simpleDateAPIFormat.format(dateBegin.time), simpleDateAPIFormat.format(dateEnd.time), adults[adultPosition])
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSubscribe { viewState.showLoading() }
-                        .subscribe(
-                            { offers ->
-                                if (offers.isNotEmpty())
-                                    offerIntoHotel(hotels, offers).filter { it.offers.isNotEmpty() }
-                                        .let {
-                                            hotelsListPresenter.hotels.clear()
-                                            hotelsListPresenter.hotels.addAll(it)
-                                        }
-                                viewState.updateList()
-                                viewState.hideLoading()
-                            }, { e ->
-                                Log.e("Retrofit", "Ошибка при получении офферов", e)
-                                viewState.hideLoading()
-                            }
-                        )
-
+                    loadOffers()
                 }, { e ->
                     Log.e("Retrofit", "Ошибка при получении отелей", e)
                     viewState.hideLoading()
@@ -93,19 +73,30 @@ class HotelsPresenter @AssistedInject constructor(
     }
 
     fun reLoadData() {
+        if (allHotels.isNullOrEmpty()){
+            loadData()
+        } else {
+            loadOffers()
+        }
+    }
 
+    private fun loadOffers() {
         offersRepository.getOffers(cityModel, simpleDateAPIFormat.format(dateBegin.time), simpleDateAPIFormat.format(dateEnd.time), adults[adultPosition])
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showLoading() }
             .subscribe(
                 { offers ->
-                    if (offers.isNotEmpty())
+                    if (offers.isNotEmpty()){
                         offerIntoHotel(allHotels, offers).filter { it.offers.isNotEmpty() }
                             .let {
                                 hotelsListPresenter.hotels.clear()
                                 hotelsListPresenter.hotels.addAll(it)
                             }
+                        viewState.hideEmptyText()
+                    } else {
+                        viewState.showEmptyText()
+                    }
                     viewState.updateList()
                     viewState.hideLoading()
                 }, { e ->
@@ -164,7 +155,7 @@ class HotelsPresenter @AssistedInject constructor(
         return true
     }
 
-    fun setdateBegin(dateBegin: Calendar) {
+    fun setDateBegin(dateBegin: Calendar) {
         this.dateBegin.time = dateBegin.time
     }
 

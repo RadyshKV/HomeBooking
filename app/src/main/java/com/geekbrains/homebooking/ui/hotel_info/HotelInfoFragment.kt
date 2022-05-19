@@ -8,18 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.homebooking.App
 import com.geekbrains.homebooking.databinding.FragmentHotelInfoBinding
 import com.geekbrains.homebooking.ui.hotel_info.adapter.OffersRecyclerViewAdapter
-import com.geekbrains.homebooking.ui.hotels.adapter.HotelsAdapter
-import com.geekbrains.homebooking.ui.imageloading.GlideImageLoader
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class HotelInfoFragment() : MvpAppCompatFragment(), HotelInfoView, BackButtonListener {
+class HotelInfoFragment: MvpAppCompatFragment(), HotelInfoView, BackButtonListener {
 
     private val presenter by moxyPresenter {
         App.instance.appComponent.hotelInfoPresenterFactory().presenter(hotelModel)

@@ -20,4 +20,8 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindsOfferRepository (impl: OffersRepositoryImpl): OffersRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindsUserRepository (impl: UserRepositoryImpl): UserRepository
 }

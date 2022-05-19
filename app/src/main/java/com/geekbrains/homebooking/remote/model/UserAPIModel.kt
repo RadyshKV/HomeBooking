@@ -1,12 +1,18 @@
-package com.geekbrains.homebooking.model
+package com.geekbrains.homebooking.remote.model
 
 import com.google.gson.annotations.Expose
 import java.io.Serializable
 
-data class UserModel (
+data class UserRequestBody(
     @Expose
-    var id: Int?=0,
+    val email: String?,
 
+    @Expose
+    val password: String?,
+
+    ) : Serializable
+
+data class RegisterRequestBody(
     @Expose
     var email: String? = "",
 
@@ -40,8 +46,4 @@ data class UserModel (
     @Expose
     var citizen: String? = "",
 
-    @Expose
-    var date_joined: String? = "",
-
     ) : Serializable
-

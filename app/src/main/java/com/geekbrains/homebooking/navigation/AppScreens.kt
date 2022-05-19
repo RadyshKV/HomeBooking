@@ -2,6 +2,8 @@ package com.geekbrains.homebooking.navigation
 
 import com.geekbrains.homebooking.model.CityModel
 import com.geekbrains.homebooking.model.HotelModel
+import com.geekbrains.homebooking.model.UserModel
+import com.geekbrains.homebooking.ui.account.AccountFragment
 import com.geekbrains.homebooking.ui.auth.LoginFragment
 import com.geekbrains.homebooking.ui.cities.CitiesFragment
 import com.geekbrains.homebooking.ui.hotel_info.HotelInfoFragment
@@ -19,6 +21,8 @@ interface AppScreens{
     fun loginScreen(): FragmentScreen
 
     fun registerScreen(): FragmentScreen
+
+    fun accountScreen(userModel: UserModel): FragmentScreen
 }
 
 
@@ -41,5 +45,9 @@ class AppScreensImpl: AppScreens {
 
     override fun registerScreen() = FragmentScreen {
         RegisterFragment()
+    }
+
+    override fun accountScreen(userModel: UserModel) = FragmentScreen {
+        AccountFragment.newInstance(userModel)
     }
 }
