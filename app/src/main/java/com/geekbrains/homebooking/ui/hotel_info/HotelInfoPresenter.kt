@@ -2,7 +2,6 @@ package com.geekbrains.homebooking.ui.hotel_info
 
 import com.geekbrains.homebooking.model.HotelModel
 import com.geekbrains.homebooking.model.OfferModel
-import com.geekbrains.homebooking.ui.base.IListPresenter
 import com.geekbrains.homebooking.ui.hotel_info.adapter.Cell
 import com.geekbrains.homebooking.ui.hotel_info.adapter.CellOffer
 import com.geekbrains.homebooking.ui.hotel_info.adapter.CellRoom
@@ -27,22 +26,17 @@ class HotelInfoPresenter @AssistedInject constructor(
 
     private fun initView() {
         setHotelAddress()
-        setHotelName()
-        setHotelType()
+        setHotelImage()
+    }
+
+    private fun setHotelImage() {
+        viewState.loadImage(hotelModel.images.firstOrNull())
     }
 
     private fun setOfferList() {
         offersListPresenter.offers.addAll(hotelModel.offers)
         offersListPresenter.addItems()
         viewState.updateList()
-    }
-
-    private fun setHotelName() {
-        viewState.setHotelName(hotelModel.name)
-    }
-
-    private fun setHotelType() {
-        viewState.setHotelType(hotelModel.type)
     }
 
     private fun setHotelAddress() {

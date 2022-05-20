@@ -37,8 +37,8 @@ class HotelsAdapter (
 
         override var pos: Int = -1
 
-        override fun loadImage(imageUrl: String?) {
-            imageLoader.loadInto(imageUrl, vb.imageHotel)
+        override fun loadImage(url: String?) {
+            imageLoader.loadInto(url, vb.imageHotel)
         }
     }
 

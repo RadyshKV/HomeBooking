@@ -1,43 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:clickable="true"
     android:focusable="true">
 
-    <LinearLayout
-        android:id="@+id/hotel_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginVertical="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+    <ImageView
+        android:id="@+id/image_hotel"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/margin_15_dp"
+        android:cropToPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/hotel_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            tools:text="Огни столицы"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/hotel_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_marginStart="5dp"
-            android:textSize="20sp"
-            tools:text="Гостиница"
-            android:textStyle="bold"/>
-
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/hotel_address"
@@ -45,11 +29,11 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
-        tools:text="Гостиница"
         android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/hotel_layout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/image_hotel"
+        tools:text="адрес" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -65,3 +49,4 @@
         app:layout_constraintTop_toBottomOf="@id/hotel_address" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -27,12 +27,12 @@ class OffersRecyclerViewAdapter(
 
         fun bind(cell: CellOffer) {
             vb.accName.text =  cell.offer?.acc_name
-            vb.tariffName.text = cell.offer?.tariff_name
             vb.mealName.text = cell.offer?.meal_name
             vb.dateBegin.text =cell.offer?.date_begin
             vb.dateEnd.text =cell.offer?.date_end
             vb.nights.text = cell.offer?.nights.toString()
-            vb.quote.text = cell.offer?.quote.toString()
+            vb.price.text = cell.offer?.price.toString()
+            vb.currency.text = cell.offer?.currency.toString()
         }
     }
 
