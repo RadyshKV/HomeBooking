@@ -26,13 +26,18 @@ class OffersRecyclerViewAdapter(
         RecyclerView.ViewHolder(vb.root) {
 
         fun bind(cell: CellOffer) {
-            vb.accName.text =  cell.offer?.acc_name
+            vb.accName.text = cell.offer?.acc_name
             vb.mealName.text = cell.offer?.meal_name
-            vb.dateBegin.text =cell.offer?.date_begin
-            vb.dateEnd.text =cell.offer?.date_end
+            vb.dateBegin.text = cell.offer?.date_begin
+            vb.dateEnd.text = cell.offer?.date_end
             vb.nights.text = cell.offer?.nights.toString()
             vb.price.text = cell.offer?.price.toString()
             vb.currency.text = cell.offer?.currency.toString()
+            vb.submitButton.setOnClickListener {
+                cell.offer?.let { it ->
+                    presenter.itemClickListener?.invoke(it)
+                }
+            }
         }
     }
 

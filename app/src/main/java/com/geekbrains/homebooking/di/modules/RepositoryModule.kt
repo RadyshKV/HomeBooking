@@ -24,4 +24,9 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindsUserRepository (impl: UserRepositoryImpl): UserRepository
+
+    @Singleton
+    @Binds
+    abstract fun bookingRepository (impl: BookingRepositoryImpl): BookingRepository
+
 }

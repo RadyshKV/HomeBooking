@@ -1,8 +1,6 @@
 package com.geekbrains.homebooking.domain
 
-import com.geekbrains.homebooking.model.AuthorizationState
-import com.geekbrains.homebooking.model.UserModel
-import com.geekbrains.homebooking.model.UserToken
+import com.geekbrains.homebooking.model.*
 import com.geekbrains.homebooking.remote.RetrofitService
 import com.geekbrains.homebooking.remote.model.RegisterRequestBody
 import com.geekbrains.homebooking.remote.model.UserRequestBody
@@ -41,5 +39,33 @@ class UserRepositoryImpl @Inject constructor(
                 userModel.citizen
             )
         )
+    }
+
+    override fun getUserBookings(): Single<List<OfferModel>> {
+        return retrofitService.getUserBookings("Bearer " + AuthorizationState.token).flatMap { booking ->
+            Single.fromCallable {
+                val offers = booking.map {
+                    OfferModel(
+                        it.offer.id,
+                        "",
+                        it.offer.hotel_id,
+                        it.offer.city_id,
+                        it.offer.price,
+                        it.offer.currency,
+                        it.offer.acc_name,
+                        it.offer.room_name,
+                        it.offer.meal_name,
+                        it.offer.meal_code,
+                        it.offer.tariff_name,
+                        it.offer.date_begin,
+                        it.offer.date_end,
+                        it.offer.nights,
+                        it.offer.quote
+                    )
+                }
+                offers
+            }
+
+        }
     }
 }

@@ -47,7 +47,7 @@ class LoginPresenter @Inject constructor(
                     }
                     viewState.hideLoading()
                     router.replaceScreen(
-                        appScreens.accountScreen(userModel)
+                        appScreens.accountScreen()
                     )
                 }, { e ->
                     Log.e("Retrofit", "Ошибка при получении токена пользователя", e)

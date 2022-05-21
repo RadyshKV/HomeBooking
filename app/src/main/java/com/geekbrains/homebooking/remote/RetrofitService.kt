@@ -1,8 +1,10 @@
 package com.geekbrains.homebooking.remote
 
+import com.geekbrains.homebooking.model.BookingModel
 import com.geekbrains.homebooking.model.UserModel
 import com.geekbrains.homebooking.model.UserToken
 import com.geekbrains.homebooking.remote.model.*
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 
@@ -29,4 +31,23 @@ interface RetrofitService {
     @Headers("Content-Type: application/json")
     @POST("http://46.17.248.74:58235/api/user/create")
     fun regUser(@Body registerRequestBody: RegisterRequestBody): Single<UserModel>
+
+
+    @Headers("Content-Type: application/json")
+    @GET("http://46.17.248.74:58235/api/hotels/list")
+    fun getUserBookings(@Header("Authorization") authHeader: String): Single<List<BookingModel>>
+
+    @Headers("Content-Type: application/json")
+    @POST("http://46.17.248.74:58235/api/hotels/create")
+    fun bookingHotel(
+        @Body bookingRequestBody: BookingRequestBody,
+        @Header("Authorization") authHeader: String
+    ): Single<BookingModel>
+
+    @Headers("Content-Type: application/json")
+    @DELETE("http://46.17.248.74:58235/api/hotels/update")
+    fun deleteBooking(
+        @Body bookingRequestBody: DeleteBookingRequestBody,
+        @Header("Authorization") authHeader: String
+    ): Observable<Any>
 }

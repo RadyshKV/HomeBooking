@@ -1,7 +1,7 @@
 package com.geekbrains.homebooking.di.components
 
 import com.geekbrains.homebooking.di.modules.*
-import com.geekbrains.homebooking.ui.account.AccountPresenterFactory
+import com.geekbrains.homebooking.ui.account.AccountPresenter
 import com.geekbrains.homebooking.ui.auth.LoginPresenter
 import com.geekbrains.homebooking.ui.cities.CitiesPresenter
 import com.geekbrains.homebooking.ui.hotel_info.HotelInfoPresenterFactory
@@ -30,5 +30,5 @@ interface AppComponent {
     fun hotelInfoPresenterFactory(): HotelInfoPresenterFactory
     fun loginPresenter(): LoginPresenter
     fun registerPresenter(): RegisterPresenter
-    fun accountPresenterFactory(): AccountPresenterFactory
+    fun accountPresenter(): AccountPresenter
 }

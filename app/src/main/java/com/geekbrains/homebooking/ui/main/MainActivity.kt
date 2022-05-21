@@ -38,7 +38,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                     presenter.findButtonPressed()
                     return@setOnItemSelectedListener true
                 }
-                R.id.navigation_sign_in -> {
+                R.id.navigation_acc -> {
                     presenter.signinButtonPressed()
                     return@setOnItemSelectedListener true
                 }

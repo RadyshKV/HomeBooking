@@ -1,5 +1,6 @@
 package com.geekbrains.homebooking.domain
 
+import com.geekbrains.homebooking.model.OfferModel
 import com.geekbrains.homebooking.model.UserModel
 import com.geekbrains.homebooking.model.UserToken
 import io.reactivex.rxjava3.core.Single
@@ -13,4 +14,6 @@ interface UserRepository {
     fun loginUser(userModel: UserModel): Single<UserToken>
 
     fun regUser(userModel: UserModel): Single<UserModel>
+
+    fun getUserBookings(): Single<List<OfferModel>>
 }

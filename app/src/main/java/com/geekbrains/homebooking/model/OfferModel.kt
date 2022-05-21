@@ -9,6 +9,9 @@ data class OfferModel(
     val id: String,
 
     @Expose
+    val m_offer_id: String?,
+
+    @Expose
     val hotel_id: Int,
 
     val city_id: Int?,

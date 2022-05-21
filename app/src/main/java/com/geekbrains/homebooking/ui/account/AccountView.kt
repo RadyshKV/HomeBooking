@@ -6,6 +6,10 @@ import moxy.viewstate.strategy.alias.AddToEndSingle
 
 interface AccountView: MvpView {
 
+
+    @AddToEndSingle
+    fun updateList()
+
     @AddToEndSingle
     fun showLoading()
 

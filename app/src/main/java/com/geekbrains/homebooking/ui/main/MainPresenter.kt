@@ -22,7 +22,12 @@ class MainPresenter @Inject constructor(
     }
 
     fun signinButtonPressed(){
-        router.navigateTo(appScreens.loginScreen())
+        if (AuthorizationState.isAuthorized == true)  {
+            router.navigateTo(appScreens.accountScreen())
+
+        } else {
+            router.navigateTo(appScreens.loginScreen())
+        }
     }
 
     fun backPressed(){

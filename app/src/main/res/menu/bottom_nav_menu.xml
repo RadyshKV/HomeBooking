@@ -7,8 +7,8 @@
         android:title="@string/title_find" />
 
     <item
-        android:id="@+id/navigation_sign_in"
-        android:icon="@drawable/ic_baseline_login_24"
-        android:title="@string/title_sign_in" />
+        android:id="@+id/navigation_acc"
+        android:icon="@drawable/ic_baseline_account_box_24"
+        android:title="@string/title_acc" />
 
 </menu>

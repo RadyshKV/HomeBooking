@@ -41,6 +41,7 @@ class RoomOffersCache(
             db.offerDao.getByHotelId(hotelModel.id).map { roomModel ->
                 OfferModel(
                     roomModel.id,
+                    "",
                     roomModel.hotelId,
                     roomModel.cityId,
                     roomModel.price,
@@ -64,6 +65,7 @@ class RoomOffersCache(
             db.offerDao.getByCityId(cityModel.id).map { roomModel ->
                 OfferModel(
                     roomModel.id,
+                    "",
                     roomModel.hotelId,
                     roomModel.cityId,
                     roomModel.price,
